@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wellbeing App</title>
+</head>
+<body>
+    <h1>Daily Emotion Tracker</h1>
+
+    <form method="POST">
+        <label>Emotion:</label>
+        <input type="text" name="emotion" required><br><br>
+
+        <label>Note:</label>
+        <input type="text" name="note"><br><br>
+
+        <label>Time:</label>
+        <input type="text" name="time"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Entries</h2>
+    <ul>
+        {% for entry in entries %}
+            <li><strong>{{ entry.emotion }}</strong>:
+            {{ entry.note }}
+            ({{ entry.time}})
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
