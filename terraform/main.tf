@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_instance" "webapp_server" {
   ami                    = "ami-00c631543d158ee40"
   instance_type          = "t2.micro"
-  key_name               = aws_key_pair.deployer.key_name
+  key_name               = aws_key_pair.keypair.key_name
   vpc_security_group_ids = [aws_security_group.webapp_sg.id]
   user_data              = file("userdata.sh")
 
@@ -37,7 +37,7 @@ resource "aws_security_group" "webapp_sg" {
 }
 resource "aws_key_pair" "keypair" {
   key_name   = "wellbeing-key"
-  public_key = file("~/.ssh/id_rsa.pub")
+  public_key = file("/Users/queenomotola/Downloads/wb-app-kp.pem")
 }
 
 
