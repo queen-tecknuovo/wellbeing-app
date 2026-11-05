@@ -2,13 +2,8 @@ provider "aws" {
   region = "us-west-2"
 }
 
-resource "aws_instance" "webapp_server" {
-  ami                    = "ami-00c631543d158ee40"
-  instance_type          = "t2.micro"
-  key_name               = aws_key_pair.keypair.key_name
-  vpc_security_group_ids = [aws_security_group.webapp_sg.id]
-  user_data              = file("userdata.sh")
-
+resource "aws_ecs_cluster" "app_cluster" {
+  name = "wellbeing-cluster"
 }
 
 resource "aws_security_group" "webapp_sg" {
@@ -35,11 +30,6 @@ resource "aws_security_group" "webapp_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-resource "aws_key_pair" "keypair" {
-  key_name   = "wellbeing-key"
-  public_key = file("/Users/queenomotola/Downloads/wb-app-kp.pem")
-}
-
 
 resource "aws_ecr_repository" "wellbeing" {
   name = "wellbeing-app"
